@@ -1,3 +1,4 @@
+
 /**
  * Definition for a binary tree node.
  * public class TreeNode {
@@ -16,21 +17,16 @@
 class Solution {
     public int minDepth(TreeNode root) {
         if(root == null)return 0;
-        
+        if(root.left == null && root.right != null){
+            return 1 + minDepth(root.right);
+        }
+        if(root.left != null && root.right == null){
+            return 1 + minDepth(root.left); 
+        }
         int left = minDepth(root.left);
         int right = minDepth(root.right);
 
-        if(root.left == null && root.right == null)
-            return 1;
-        
-        else if(root.left == null)
-            return 1 + right;
-       
-        else if(root.right == null)
-            return 1 + left;
-            
-        else
-            return Math.min(left,right) + 1;
-        
+        return Math.min(left,right) + 1;
+
     }
 }
