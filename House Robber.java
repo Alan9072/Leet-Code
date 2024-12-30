@@ -21,3 +21,21 @@ class Solution {
         return Math.max(case1,case2);
     }
 }
+/////////////////////////////////////////////////////
+//tabulation method 
+class Solution {
+    public int rob(int[] nums) {
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+
+        for(int i=1;i<nums.length;i++){
+
+            int take = nums[i];
+            if(i > 1)take += dp[i - 2];
+            int non_take = dp[i - 1];
+
+            dp[i] = Math.max(take,non_take);
+        }
+        return dp[nums.length - 1];
+    }
+}
