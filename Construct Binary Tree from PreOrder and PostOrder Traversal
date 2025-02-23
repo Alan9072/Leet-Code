@@ -1,0 +1,57 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public TreeNode constructFromPrePost(int[] preorder, int[] postorder) {
+        return construct(preorder,postorder);
+    }
+    public TreeNode construct(int[] preorder,int[] postorder){
+        
+        if(preorder.length == 0 && postorder.length == 0){
+            return null;
+        }
+        TreeNode node = new TreeNode();
+        node.val = preorder[0];
+
+        if(preorder.length == 1 && postorder.length == 1 ){
+            node.left = null;
+            node.right = null;
+            return node;
+        }
+        
+        int splitFactor = preorder[1];
+        int index = -1;
+        for(int i=0;i<postorder.length;i++){
+            if(postorder[i] == splitFactor){
+                index = i;
+                break;
+            }
+        }
+        //splitting both the arrays into two and passing
+        
+        int[] postordFirst = Arrays.copyOfRange(postorder,0,index+1);
+        int[] postordSec = Arrays.copyOfRange(postorder,index + 1,postorder.length -1);
+
+        int preFirst[] = Arrays.copyOfRange(preorder,1,postordFirst.length + 1);
+        int preSecond[] = Arrays.copyOfRange(preorder,postordFirst.length + 1,preorder.length);
+
+        node.left = construct(preFirst,postordFirst);
+        node.right = construct(preSecond,postordSec);
+
+        return node;
+        
+
+    }
+}
