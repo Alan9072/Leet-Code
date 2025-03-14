@@ -13,7 +13,7 @@ class Solution {
         if (dummy[start] != -1) return dummy[start];
 
         int possibleMin = Integer.MAX_VALUE;
-        for (int i = start + 1; i <= Math.min(start + nums[start], nums.length - 1); i++) { 
+        for (int i = start + 1; i <= (start + nums[start]) &&  i <= (nums.length - 1); i++) { 
             possibleMin = Math.min(target(nums, i, dummy), possibleMin);
         }
 
