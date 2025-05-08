@@ -1,5 +1,6 @@
 //Here we start from 0 (useing bfs on 0 not 1)
 //for each adjacent cell add distance + 1 and put in the queue
+//Pair class
 class Pair {
     int i;
     int j;
