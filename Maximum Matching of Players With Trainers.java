@@ -18,3 +18,20 @@ class Solution {
         return count;
     }
 }
+///////////////////////////////////////////////
+class Solution {
+    public int matchPlayersAndTrainers(int[] players, int[] trainers) {
+        Arrays.sort(players);
+        Arrays.sort(trainers);
+
+        int start = 0;
+        int count = 0;
+        for(int i=0;i<trainers.length;i++){
+            if(start < players.length && trainers[i] >= players[start]){
+                count++;
+                start++;
+            }
+        }
+        return count;
+    }
+}
